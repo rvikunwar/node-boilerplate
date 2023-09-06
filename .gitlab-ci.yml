@@ -1,0 +1,30 @@
+stage:
+  - build
+  - deploy
+
+image: docker:24.0.6
+servies:
+  - docker:20.0.6-dind
+
+variables:
+  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+
+before_script:
+  - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+
+build:
+  state: build
+  variables:
+    DOCKER_TLS_CERTDIR: "/certs"
+  script:
+    - docker build -t $CONTAINER_RELEASE_IMAGE . 
+    - docker push $CONTAINER_RELEASE_IMAGE
+
+deploy:
+  stage: deploy
+  tags:
+    - docker
+  script: 
+    - docker pull $CONTAINER_RELEASE_IMAGE
+    - docker ps -aq | xargs docker stop | xargs docker rm
+    - docker run -d -p 9001:9001 $CONTAINER_RELEASE_IMAGE
