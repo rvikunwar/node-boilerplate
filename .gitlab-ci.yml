@@ -14,6 +14,8 @@ before_script:
 
 build:
   stage: build
+  tags:
+    - docker
   variables:
     DOCKER_TLS_CERTDIR: "/certs"
   script:
