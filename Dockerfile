@@ -4,5 +4,5 @@ WORKDIR /home/app
 COPY . /home/app
 RUN npm install
 
-EXPOSE 3000
+EXPOSE 9001
 CMD ["node", "index.js"]
