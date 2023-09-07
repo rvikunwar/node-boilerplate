@@ -28,4 +28,4 @@ deploy:
     - docker
   script: 
     - docker pull $CONTAINER_RELEASE_IMAGE
-    - docker run -d -p 9001:9001 $CONTAINER_RELEASE_IMAGE
+    - docker run -d -p 3000:3000 $CONTAINER_RELEASE_IMAGE
