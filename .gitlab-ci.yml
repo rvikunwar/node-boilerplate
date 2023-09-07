@@ -28,4 +28,6 @@ deploy:
     - docker
   script: 
     - docker pull $CONTAINER_RELEASE_IMAGE
+    - docker ps -aq | xargs docker stop 
+    - docker ps -aq | xargs docker rm
     - docker run -d -p 3000:3000 $CONTAINER_RELEASE_IMAGE
