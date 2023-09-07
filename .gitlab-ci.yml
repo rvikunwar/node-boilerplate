@@ -28,8 +28,8 @@ deploy:
   tags:
     - docker
   script: 
-    - docker pull $CONTAINER_RELEASE_IMAGE
     - docker stop $APP_NAME || true
     - docker rm $APP_NAME || true
     - docker rmi $CONTAINER_RELEASE_IMAGE || true
+    - docker pull $CONTAINER_RELEASE_IMAGE
     - docker run --name $APP_NAME -d -p 3000:3000 $CONTAINER_RELEASE_IMAGE
