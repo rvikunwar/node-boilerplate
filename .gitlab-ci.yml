@@ -30,4 +30,4 @@ deploy:
   script: 
     - docker stop $APP_NAME || true
     - docker rm $APP_NAME || true
-    - docker rmi -f $CONTAINER_RELEASE_IMAGE || true
+    - docker rmi -f $CI_REGISTRY_IMAGE || true
