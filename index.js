@@ -1,20 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const crypto = require("crypto");
 const https = require("https");
-const PORT = 9001;
+const PORT = 3001;
 
 app.use(bodyParser.json());
 
 // Simulated payment webhook
-app.post("/webhook", (req, res) => {
-  console.log("=========================");
-  console.log("Webhook called");
-  console.log("=========================");
-  res.status(200).send("Webhook received");
-});
-
+app.use(express.static('uploads'))
 
 app.get("/health", (req, res) => {
   res.status(200).json({ status: "OK" });
